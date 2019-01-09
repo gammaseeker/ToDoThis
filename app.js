@@ -1,11 +1,11 @@
 var express = require("express");
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/todo", {useNewUrlParser: true});
 var bodyParser = require('body-parser');
 var url = "mongodb://localhost:27017/todo";
 var app = express();
 
+mongoose.connect("mongodb://localhost:27017/todo", {useNewUrlParser: true});
 var Schema = mongoose.Schema;
 var todoSchema = new mongoose.Schema({
     title: String    
@@ -23,7 +23,17 @@ app.get("/", function(req, res){
 });
 
 app.post("/submit", function(req, res){
-    console.log(req.body.todo);
+    Todos.create({
+        title: req.body.todo
+    }, function(err){
+        if(err){
+            console.log("error");
+            } else{
+                console.log("Saved");
+            }
+        }
+    );
+    
     res.redirect("/");
 });
 
