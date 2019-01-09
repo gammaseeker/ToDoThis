@@ -37,6 +37,17 @@ app.post("/submit", function(req, res){
     res.redirect("/");
 });
 
+app.post("/delete", function(req, res){
+    Todos.deleteOne({title: ""}, function(err){
+        if(err){
+            console.log("error");
+        }else{
+            console.log("Deleted");
+        }
+    }
+
+});
+
 MongoClient.connect(url, {useNewUrlParser: true},function(err, db){
     if(err) throw err;
     console.log("Db created");
