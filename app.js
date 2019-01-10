@@ -19,7 +19,11 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 
 app.get("/", function(req, res){
-    res.render("index");
+    Todos.find(function(err, todos, count){
+        res.render("index", {
+            todos: todos
+        });
+    });
 });
 
 app.post("/submit", function(req, res){
@@ -30,22 +34,18 @@ app.post("/submit", function(req, res){
             console.log("error");
             } else{
                 console.log("Saved");
+                res.redirect("/");
             }
         }
     );
-    
-    res.redirect("/");
 });
 
-app.post("/delete", function(req, res){
-    Todos.deleteOne({title: ""}, function(err){
-        if(err){
-            console.log("error");
-        }else{
-            console.log("Deleted");
-        }
-    }
-
+app.get("/destroy/:id", function(req, res){
+    Todos.findById(req.params.id, function(err, todo){
+        todo.remove(function(err, todo){
+            res.redirect('/');
+        });
+    });
 });
 
 MongoClient.connect(url, {useNewUrlParser: true},function(err, db){

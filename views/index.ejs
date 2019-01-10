@@ -1,17 +1,22 @@
 <% include partials/header %>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
     <h1 > ToDoThis </h1>
     <h2 > Let's do this!</h2>
-    <div id = "container" class="list-group">
-      <span class="list-group-item list-group-item-action ">Cras justo odi </span>
-      <span class="list-group-item list-group-item-action ">Dapibus ac facilisis in</span>
-      <span class="list-group-item list-group-item-action ">Morbi leo risus</span>
-      <span class="list-group-item list-group-item-action ">Porta ac consectetur ac</span>
-      <span class="list-group-item list-group-item-action ">Vestibulum at eros</span>
-    </div>
+    <form>
+        <div id = "container" class="list-group">
+          <% todos.forEach( function( todo ) { %>
+            <span class="list-group-item list-group-item-action"> <%= todo.title %> </span>
+            <span> <a href="/destroy/<%= todo._id %>" title="Delete this todo item">Delete</a> </span>
+          <% }); %>
+        </div>
+    </form>
     <div id="controls">
         <form method="POST" action="/submit">
             <input name="todo" type="text" placeholder="What do you want ToDo?">
-            <button class="btn btn-primary" type="submit">Add Item</button>
+            <button id="sButton" class="btn btn-primary" type="submit">Add Item</button>
         </form>
     </div>
 <% include partials/footer %>
