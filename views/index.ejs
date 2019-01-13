@@ -3,20 +3,38 @@
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
-    <h1 > ToDoThis </h1>
-    <h2 > Let's do this!</h2>
-    <form id="todoForm">
-        <div id = "container" class="list-group">
-          <% todos.forEach( function( todo ) { %>
-            <span class="list-group-item list-group-item-action"> <%= todo.title %> </span>
-            <span> <a href="/destroy/<%= todo._id %>" title="Delete this todo item">Delete</a> </span>
-          <% }); %>
-        </div>
-    </form>
-    <div id="controls">
-        <form method="POST" action="/submit">
-            <input name="todo" type="text" placeholder="What do you want ToDo?">
-            <button id="sButton" class="btn btn-primary" type="submit">Add Item</button>
+    <script src="js/index.js"></script>
+    <div id="big-container">
+        <h1 > ToDoThis </h1>
+        <h2 > Let's do this!</h2>
+        <form id="todoForm">
+            <div id = "container" class="list-group">
+            <% todos.forEach( function( todo ) { %>
+                <span class="list-group-item list-group-item-action"> 
+                        <input type="checkbox" class="form-check-input" id="check<%= todo._id %>" onclick="isChecked('check<%= todo._id %>', 'content<%= todo._id %>')">
+                        <label class="form-check-label" for="check<%= todo._id %>" id="content<%= todo._id %>">
+                            <%= todo.title %>
+                        </label>
+                    <span id="delete"> 
+                        <a href="/destroy/<%= todo._id %>" title="Delete this todo item">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a> 
+                    </span>
+                </span>
+            <% }); %>
+            </div>
         </form>
+        <div id="controls">
+            <form method="POST" action="/submit">
+                <input name="todo" type="text" placeholder="What do you want ToDo?">
+                <button id="sButton" class="btn btn-primary" type="submit">Add Item</button>
+            </form>
+        </div>
+    </div>
+    <div class="side-col">
+            <img id="pfp" src="img/pfp.jpg">
+            <div id="ltg">
+                    Long Term Goals:
+            </div>
     </div>
 <% include partials/footer %>
