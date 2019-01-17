@@ -19,9 +19,19 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 
 app.get("/", function(req, res){
+    var currentDate ="";
+    var d = new Date();
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var month = d.getMonth();
+    var date = d.getDate();
+    var year = d.getFullYear();
+    var day = d.getDay();
+    currentDate += days[day] + ", " + months[month] + " " + date + ", " + year;
     Todos.find(function(err, todos, count){
         res.render("index", {
-            todos: todos
+            todos: todos,
+            currentDate: currentDate
         });
     });
 });
