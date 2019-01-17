@@ -1,0 +1,4 @@
+data/*
+mongod
+package-lock.json
+node_modules/*
