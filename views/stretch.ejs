@@ -1,0 +1,26 @@
+<% include partials/header %>
+<link rel="stylesheet" href="/css/stretch.css">    
+<div class="container">
+    <form method="POST" action="/stretch-post">
+        <label>Stretch Goal:</label>
+        <input type="text" name="name_field"><br>
+
+        <label class="smart">Specific</label>
+        <input type="text" name="name_field"><br>
+
+        <label class="smart">Measurable:</label>
+        <input type="text" name="name_field"><br>
+
+        <label class="smart">Achievable:</label>
+        <input type="text" name="name_field"><br>
+
+        <label class="smart">Realistic:</label>
+        <input type="text" name="name_field"><br>
+
+        <label class="smart">Timeline:</label>
+        <input type="text" name="name_field"><br>
+        
+        <button id="sButton" class="btn btn-primary" type="submit">Add Item</button>
+    </form>
+</div>
+<% include partials/footer %>

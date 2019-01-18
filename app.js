@@ -8,7 +8,8 @@ var app = express();
 mongoose.connect("mongodb://localhost:27017/todo", {useNewUrlParser: true});
 var Schema = mongoose.Schema;
 var todoSchema = new mongoose.Schema({
-    title: String    
+    title: String,
+    strike: Boolean    
 });
 var Todos = mongoose.model("Todos", todoSchema);
 
@@ -19,6 +20,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 
 app.get("/", function(req, res){
+    
+    //day, month date, year
     var currentDate ="";
     var d = new Date();
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -28,6 +31,7 @@ app.get("/", function(req, res){
     var year = d.getFullYear();
     var day = d.getDay();
     currentDate += days[day] + ", " + months[month] + " " + date + ", " + year;
+
     Todos.find(function(err, todos, count){
         res.render("index", {
             todos: todos,
@@ -38,7 +42,8 @@ app.get("/", function(req, res){
 
 app.post("/submit", function(req, res){
     Todos.create({
-        title: req.body.todo
+        title: req.body.todo,
+        strike: false
     }, function(err){
         if(err){
             console.log("error");
@@ -50,12 +55,41 @@ app.post("/submit", function(req, res){
     );
 });
 
+/*app.put("/update/:id", function(req, res){
+    var id = req.params.id;
+    Todos.findOne({_id:id}, function(err, foundObject){
+        if(err){
+            console.log(err);
+            res.status(500).send();
+        }else{
+            if(!foundObject){
+                res.status(404).send();
+            }else{
+                foundObject.strike = !foundObject.strike;
+                foundObject.save(function(err, updatedObject){
+                    if(err){
+                        console.log(err);
+                        res.status(500).send();
+                    }else{
+                        res.send(updatedObject);    
+                        res.redirect("/");
+                    }
+                });
+            }
+        }
+    });
+});*/
+
 app.get("/destroy/:id", function(req, res){
     Todos.findById(req.params.id, function(err, todo){
         todo.remove(function(err, todo){
             res.redirect('/');
         });
     });
+});
+
+app.get("/stretch", function(req, res){
+    res.render("stretch");
 });
 
 MongoClient.connect(url, {useNewUrlParser: true},function(err, db){

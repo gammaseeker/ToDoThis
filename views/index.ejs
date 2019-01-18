@@ -1,4 +1,5 @@
 <% include partials/header %>
+    <link rel="stylesheet" href="/css/index.css">    
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -7,28 +8,37 @@
     <div id="big-container">
         <h1 > ToDoThis </h1>
         <h2 > <%= currentDate %></h2>
+        
+        <!--To-do list-->
         <form id="todoForm">
             <div id = "container" class="list-group">
             <% todos.forEach( function( todo ) { %>
-                <span class="list-group-item list-group-item-action"> 
-                        <input type="checkbox" class="form-check-input" id="check<%= todo._id %>" onclick="isChecked('check<%= todo._id %>', 'content<%= todo._id %>')">
-                        <label class="form-check-label" for="check<%= todo._id %>" id="content<%= todo._id %>">
-                            <%= todo.title %>
-                        </label>
+                <span class="list-group-item list-group-item-action">  
+                    <input type="checkbox" class="form-check-input" 
+                        id="check<%= todo._id %>" 
+                        onclick="isChecked('check<%= todo._id %>', 'content<%= todo._id %>')">
+                    <label class="form-check-label" for="check<%= todo._id %>" 
+                        id="content<%= todo._id %>">
+                        <%= todo.title %>
+                    </label>
                     <span id="delete"> 
                         <a href="/destroy/<%= todo._id %>" title="Delete this todo item">
                             <span class="glyphicon glyphicon-trash"></span>
-                        </a> 
+                        </a>
+                        <!--<a href="/update/<%= todo._id %>">Save</a> -->
                     </span>
                 </span>
             <% }); %>
             </div>
         </form>
+        
+        <!-- add new items to list-->
         <div id="controls">
             <form method="POST" action="/submit">
                 <input name="todo" type="text" placeholder="What do you want ToDo?">
                 <button id="sButton" class="btn btn-primary" type="submit">Add Item</button>
             </form>
+            <a href="/stretch"><button class="btn btn-success">Stretch Goal</button></a>
         </div>
     </div>
     <div class="side-col">
