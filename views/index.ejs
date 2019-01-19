@@ -13,6 +13,28 @@
         <form id="todoForm">
             <div id = "container" class="list-group">
             <% todos.forEach( function( todo ) { %>
+                <% if(todo.isSmart){ %>
+                    <div class="list-group collapse" style="display: inline;">  
+                        <input type="checkbox" class="form-check-input" 
+                            id="check<%= todo._id %>" 
+                            onclick="isChecked('check<%= todo._id %>', 'content<%= todo._id %>')">
+                        <label class="form-check-label" for="check<%= todo._id %>" 
+                            id="content<%= todo._id %>">
+                            <%= todo.title %>
+                        </label>
+                        <span id="delete"> 
+                            <a href="/destroy/<%= todo._id %>" title="Delete this todo item">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                            <!--<a href="/update/<%= todo._id %>">Save</a> -->
+                        </span>
+                            <span class="list-group-item"><%= todo.specific %></span>
+                            <span class="list-group-item"><%= todo.measurable %></span>
+                            <span class="list-group-item"><%= todo.achievable %></span>
+                            <span class="list-group-item"><%= todo.realistic %></span>
+                            <span class="list-group-item"><%= todo.timeline %></span>
+                    </div>
+                <% } else{ %>
                 <span class="list-group-item list-group-item-action">  
                     <input type="checkbox" class="form-check-input" 
                         id="check<%= todo._id %>" 
@@ -28,6 +50,7 @@
                         <!--<a href="/update/<%= todo._id %>">Save</a> -->
                     </span>
                 </span>
+                <% } %>
             <% }); %>
             </div>
         </form>

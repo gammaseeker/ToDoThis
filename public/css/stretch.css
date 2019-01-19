@@ -1,9 +1,19 @@
+*{
+    box-sizing: border-box;
+}
+
 .container{
     border: 2px solid black;
     box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+    text-align: center;
+    width: 30%;
 }
 
 .smart::first-letter{
     font-weight: bold;
     font-size: 16pt;
 }
+
+/* input{
+    float: right;
+} */

@@ -9,7 +9,13 @@ mongoose.connect("mongodb://localhost:27017/todo", {useNewUrlParser: true});
 var Schema = mongoose.Schema;
 var todoSchema = new mongoose.Schema({
     title: String,
-    strike: Boolean    
+    strike: Boolean,
+    isSmart: Boolean,
+    specific: String,
+    measurable: String,
+    achievable: String,
+    realistic: String,
+    timeline: String
 });
 var Todos = mongoose.model("Todos", todoSchema);
 
@@ -43,7 +49,8 @@ app.get("/", function(req, res){
 app.post("/submit", function(req, res){
     Todos.create({
         title: req.body.todo,
-        strike: false
+        strike: false,
+        isSmart: false
     }, function(err){
         if(err){
             console.log("error");
@@ -90,6 +97,27 @@ app.get("/destroy/:id", function(req, res){
 
 app.get("/stretch", function(req, res){
     res.render("stretch");
+});
+
+app.post("/stretch-post", function(req, res){
+    Todos.create({
+        title: req.body.stretch,
+        strike: false,
+        isSmart: true,
+        specific: req.body.specific,
+        measurable: req.body.measurable,
+        achievable: req.body.achievable,
+        realistic: req.body.realistic,
+        timeline: req.body.timeline
+    }, function(err){
+        if(err){
+            console.log("error");
+            } else{
+                console.log("Saved stretch goal");
+                res.redirect("/");
+            }
+        }
+    );
 });
 
 MongoClient.connect(url, {useNewUrlParser: true},function(err, db){
