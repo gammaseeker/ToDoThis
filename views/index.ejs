@@ -1,9 +1,5 @@
 <% include partials/header %>
-    <link rel="stylesheet" href="/css/index.css">    
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/index.css">
     <script src="js/index.js"></script>
     <div id="big-container">
         <h1 > ToDoThis </h1>
@@ -14,25 +10,57 @@
             <div id = "container" class="list-group">
             <% todos.forEach( function( todo ) { %>
                 <% if(todo.isSmart){ %>
-                    <div class="list-group collapse" style="display: inline;">  
-                        <input type="checkbox" class="form-check-input" 
-                            id="check<%= todo._id %>" 
-                            onclick="isChecked('check<%= todo._id %>', 'content<%= todo._id %>')">
-                        <label class="form-check-label" for="check<%= todo._id %>" 
-                            id="content<%= todo._id %>">
-                            <%= todo.title %>
-                        </label>
-                        <span id="delete"> 
-                            <a href="/destroy/<%= todo._id %>" title="Delete this todo item">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </a>
-                            <!--<a href="/update/<%= todo._id %>">Save</a> -->
+                
+                    <div class="list-group">  
+                        <span class="list-group-item">
+                            <span class="content-container">
+                                <a href="#smart_<%= todo._id %>" data-toggle="collapse">
+                                        <i class="glyphicon glyphicon-chevron-right"></i>
+                                        <span id="content<%= todo._id %>">
+                                            <%= todo.title %>
+                                        </span>
+                                    </a>
+                            </span>
+                
+                            <span id="delete"> 
+                                <a href="/destroy/<%= todo._id %>" title="Delete this todo item">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                                <!--<a href="/update/<%= todo._id %>">Save</a> -->
+                            </span>
                         </span>
-                            <span class="list-group-item"><%= todo.specific %></span>
-                            <span class="list-group-item"><%= todo.measurable %></span>
-                            <span class="list-group-item"><%= todo.achievable %></span>
-                            <span class="list-group-item"><%= todo.realistic %></span>
-                            <span class="list-group-item"><%= todo.timeline %></span>
+                        <div class="list-group collapse collapse-container" id="smart_<%= todo._id %>">
+                            <span class="list-group-item">
+                                <input type="checkbox" class="form-check-input" 
+                                id="sCheck<%= todo._id %>" 
+                                onclick="isChecked('sCheck<%= todo._id %>', 'specific<%= todo._id %>')">
+                                <span id="specific<%= todo._id %>"><%= todo.specific %></span>
+                            </span>
+                            <span class="list-group-item">
+                                <input type="checkbox" class="form-check-input" 
+                                id="mCheck<%= todo._id %>" 
+                                onclick="isChecked('mCheck<%= todo._id %>', 'measurable<%= todo._id %>')">
+                                <span id="measurable<%= todo._id %>"><%= todo.measurable %></span>
+                            </span>
+                            <span class="list-group-item">
+                                <input type="checkbox" class="form-check-input" 
+                                id="aCheck<%= todo._id %>" 
+                                onclick="isChecked('aCheck<%= todo._id %>', 'achievable<%= todo._id %>')">
+                                <span id="achievable<%= todo._id %>"><%= todo.achievable %></span>
+                            </span>
+                            <span class="list-group-item">
+                                <input type="checkbox" class="form-check-input" 
+                                id="rCheck<%= todo._id %>" 
+                                onclick="isChecked('rCheck<%= todo._id %>', 'realistic<%= todo._id %>')">
+                                <span id="realistic<%= todo._id %>"><%= todo.realistic %></span>
+                            </span>
+                            <span class="list-group-item">
+                                <input type="checkbox" class="form-check-input" 
+                                id="tCheck<%= todo._id %>" 
+                                onclick="isChecked('tCheck<%= todo._id %>', 'timeline<%= todo._id %>')">
+                                <span id="timeline<%= todo._id %>"><%= todo.timeline %></span>
+                            </span>
+                        </div>
                     </div>
                 <% } else{ %>
                 <span class="list-group-item list-group-item-action">  
@@ -64,7 +92,7 @@
             <a href="/stretch"><button class="btn btn-success">Stretch Goal</button></a>
         </div>
     </div>
-    <div class="side-col">
+  <div class="side-col">
             <div id="border-div">
                     <img id="pfp" src="img/pfp.jpg">
             </div>

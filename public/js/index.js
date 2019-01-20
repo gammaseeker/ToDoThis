@@ -7,3 +7,13 @@ function isChecked(check_id, content_id){
         content.style.textDecoration = "initial";
     }
 }
+
+$(function() {
+        
+    $('.content-container').on('click', function() {
+      $('.glyphicon', this)
+        .toggleClass('glyphicon-chevron-right')
+        .toggleClass('glyphicon-chevron-down');
+    });
+  
+  });
