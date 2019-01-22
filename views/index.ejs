@@ -15,11 +15,11 @@
                         <span class="list-group-item">
                             <span class="content-container">
                                 <a href="#smart_<%= todo._id %>" data-toggle="collapse">
-                                        <i class="glyphicon glyphicon-chevron-right"></i>
-                                        <span id="content<%= todo._id %>">
-                                            <%= todo.title %>
-                                        </span>
-                                    </a>
+                                    <i class="glyphicon glyphicon-chevron-right"></i>
+                                    <span id="content<%= todo._id %>">
+                                        <%= todo.title %>
+                                    </span>
+                                </a>
                             </span>
                 
                             <span id="delete"> 
@@ -29,6 +29,7 @@
                                 <!--<a href="/update/<%= todo._id %>">Save</a> -->
                             </span>
                         </span>
+
                         <div class="list-group collapse collapse-container" id="smart_<%= todo._id %>">
                             <span class="list-group-item">
                                 <input type="checkbox" class="form-check-input" 
@@ -61,6 +62,7 @@
                                 <span id="timeline<%= todo._id %>"><%= todo.timeline %></span>
                             </span>
                         </div>
+
                     </div>
                 <% } else{ %>
                 <span class="list-group-item list-group-item-action">  
