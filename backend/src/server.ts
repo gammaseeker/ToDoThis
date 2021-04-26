@@ -1,4 +1,5 @@
 import express = require('express');
+let mongoose = require('mongoose');
 
 // Create a new express app instance
 const app: express.Application = express();
