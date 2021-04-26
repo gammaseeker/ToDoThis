@@ -1,8 +1,12 @@
 import express = require('express');
+import { json } from 'body-parser';
+
 let mongoose = require('mongoose');
 
 // Create a new express app instance
 const app: express.Application = express();
+
+app.use(json());
 
 app.get('/', function (req, res) {
 res.send('Hello World!');
