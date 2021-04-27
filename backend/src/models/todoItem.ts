@@ -3,6 +3,7 @@ import mongoose, { mongo } from "mongoose";
 interface ITodoItem {
     title: string;
     description: string;
+    status: boolean; // True = completed, False = not completed
 }
 
 interface TodoItemInterface extends mongoose.Model<TodoDoc>{
@@ -12,6 +13,7 @@ interface TodoItemInterface extends mongoose.Model<TodoDoc>{
 interface TodoDoc extends mongoose.Document {
     title: string;
     description: string;
+    status: boolean; // True = completed, False = not completed
 }
 
 const todoItemSchema = new mongoose.Schema({
@@ -21,6 +23,10 @@ const todoItemSchema = new mongoose.Schema({
     },
     description: {
         type: String,
+        required: true
+    },
+    status: {
+        type: Boolean,
         required: true
     }
 });
@@ -33,6 +39,7 @@ const TodoItem = mongoose.model<any, TodoItemInterface>('TodoItem', todoItemSche
 
 TodoItem.build({
     title: 'some title',
-    description: 'asd'
+    description: 'asd',
+    status: false
 });
 export { TodoItem }
