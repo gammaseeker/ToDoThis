@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { TodoItem } from '../models/todoItem';
+import { getAllTodoItems, createTodoItem } from '../controllers/todoItem';
 
 const router = express.Router();
 
@@ -7,19 +8,8 @@ router.get('/', function (req, res) {
 res.send('Hello World!');
 });
 
-router.get('/api/get_all_todo_items', async (req: Request, res: Response) => {
-    //TODO extract this logic to a controller
-    const todo = await TodoItem.find({});
-    return res.status(200).send(todo);
-});
+router.get('/api/get_all_todo_items', getAllTodoItems);
 
-router.post('/api/create_todo_item', async (req: Request, res: Response) => {
-    //TODO extract this logic to a controller
-    const { title, description } = req.body;
-    
-    const todo = TodoItem.build({ title, description });
-    await todo.save();
-    return res.status(201).send(todo);
-});
+router.post('/api/create_todo_item', createTodoItem);
 
 export { router as todoRouter }
