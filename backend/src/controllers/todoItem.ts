@@ -7,9 +7,16 @@ async function getAllTodoItems(req: Request, res: Response) {
 }
 
 async function createTodoItem(req: Request, res: Response) {
+    /*
+    const todo = TodoItem.build({
+        title: 'some title',
+        description: 'asd',
+        status: false
+    });
+    */
     const { title, description } = req.body;
     
-    const todo = TodoItem.build({ title, description });
+    const todo = TodoItem.build({ title, description, status: false });
     await todo.save();
     return res.status(201).send(todo);
 }

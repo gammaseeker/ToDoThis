@@ -37,9 +37,4 @@ todoItemSchema.statics.build = (attr: ITodoItem) => {
 
 const TodoItem = mongoose.model<any, TodoItemInterface>('TodoItem', todoItemSchema);
 
-TodoItem.build({
-    title: 'some title',
-    description: 'asd',
-    status: false
-});
 export { TodoItem }
