@@ -21,4 +21,13 @@ async function createTodoItem(req: Request, res: Response) {
     return res.status(201).send(todo);
 }
 
-export { getAllTodoItems, createTodoItem}
+function completeTodoItem(req: Request, res: Response) {
+    const { id, title} = req.body;
+    const query = {'_id': id, 'title': title};
+    const update = TodoItem.findOneAndUpdate(query, {status: true}, {upsert: false}, function(err, doc) {
+        if (err) return res.status(500);
+        return res.status(200).send({});
+    });
+}
+
+export { getAllTodoItems, createTodoItem, completeTodoItem }
