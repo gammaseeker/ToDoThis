@@ -1,6 +1,7 @@
 import React from 'react';
+import Card from './UI/Card';
 
-function TodoItem() {
+const TodoItem = () => {
 
 }
 
